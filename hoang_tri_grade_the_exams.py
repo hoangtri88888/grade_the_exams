@@ -55,10 +55,10 @@ class the_class:
             print("Invalid line of data: N# is invalid: \n", df[0][i])
             error_vald_N.append(c)
             df.drop(index=[i], inplace=True) 
-      print("\n**** REPORT ****\n")
       if len(error_vaild_26) + len(error_vald_N) ==0: 
         print("No errors found!") 
-      # df.values
+      print("\n**** REPORT ****\n")
+        # df.values
       print("Total valid lines of data: {}".format(len(df))) # các dòng hợp lệ
       print("Total invalid lines of data: {}".format(len(error_vaild_26) + len(error_vald_N))) # các dòng không hợp lệ
     
