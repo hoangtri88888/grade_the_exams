@@ -21,7 +21,6 @@ class the_class:
                 data_input = pd.read_csv(file_name, on_bad_lines="skip",sep=",",header=None) # bỏ qua những dòng null
                 data_input = data_input[0].str.split(',',expand=True) # lấy các mã sinh viên
                 print("Successfully opened" + file_name +"\n")
-                # print(data_input.head(5))
                 self.data_input = data_input
                 self.file_name = file_name
                 break
@@ -32,9 +31,9 @@ class the_class:
                 if xac_nhan == False:
                     print("Kết thúc chương trình")
                     break
+                    
+                    
     def ANALYZING(self): # Phân tích các dòng hợp lệ
-      # file_name = input("\n"+"Enter a file name :")
-      # self.file_name
       df = pd.read_csv(self.file_name, sep=' ' ,header=None) # đưa hết về 1 cột để phân tích
       self.df=df
       error_vaild_26 = [] # list lỗi không đủ 26 cột
@@ -55,14 +54,14 @@ class the_class:
             print("Invalid line of data: N# is invalid: \n", df[0][i])
             error_vald_N.append(c)
             df.drop(index=[i], inplace=True) 
-      # print("lỗi 26 dòng",error_vaild_26)
-      # print("lỗi N", error_vald_N)
       print("\n**** REPORT ****\n")
       if len(error_vaild_26) + len(error_vald_N) ==0: 
         print("No errors found!") 
       # df.values
       print("Total valid lines of data: {}".format(len(df))) # các dòng hợp lệ
       print("Total invalid lines of data: {}".format(len(error_vaild_26) + len(error_vald_N))) # các dòng không hợp lệ
+    
+    
     def Dap_An(self): # nhập đán án mẫu
         while True:
             try:
@@ -81,12 +80,12 @@ class the_class:
                     print("Ket thuc chuong trinh")
                     break
             print(answer_key)
+            
+            
     def Check_dap_an(self): # chấm điểm
         diem_tong = []
         for i in self.df.index.values:
             dapan_sinhvien = self.df[0][i].split(sep=",") # lấy từng dòng của df
-            # print("1",dapan_sinhvien)
-            # print("2",self.answer_key)
             score = 0
             for j in range(1,26):
                     if self.answer_key[j-1] == dapan_sinhvien[j]: # len của đáp án sinh viên = 26, len của đáp án = 25
@@ -95,9 +94,6 @@ class the_class:
                       None
                     else:
                       score = score - 1
-
-            # if score < 0:
-            #     score = 0
             diem_tong.append(score)
         # print(self.df)
         self.df["score"] = diem_tong # tạo 1 cột bằng điểm đã tính của từng dòng
@@ -106,6 +102,8 @@ class the_class:
         print("Lowest score: ", self.df["score"].min())
         print("Range of scores: ", self.df["score"].max()-self.df["score"].min())
         print("Median score: ", int(self.df["score"].median()))
+        
+        
     def export_file(self):
       self.df['ma_sv'] = self.df.iloc[:,0].apply (lambda x: x.split (',')[0]) # tạo cột mã sinh viên 
       file_name2 = self.file_name[:len(self.file_name)-4] + "_grades.txt" # tạo tên ghi file
