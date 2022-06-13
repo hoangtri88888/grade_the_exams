@@ -34,6 +34,7 @@ class the_class:
                     
                     
     def ANALYZING(self): # Phân tích các dòng hợp lệ
+      print("\n**** ANALYZING ****\n")
       df = pd.read_csv(self.file_name, sep=' ' ,header=None) # đưa hết về 1 cột để phân tích
       self.df=df
       error_vaild_26 = [] # list lỗi không đủ 26 cột
